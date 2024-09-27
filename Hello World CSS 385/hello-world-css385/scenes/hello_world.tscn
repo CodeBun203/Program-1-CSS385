@@ -1,0 +1,51 @@
+[gd_scene load_steps=6 format=3 uid="uid://b255caqjgk7ik"]
+
+[ext_resource type="Script" path="res://scripts/game_manager.gd" id="1_qhpcb"]
+[ext_resource type="Texture2D" uid="uid://bd3t5bticdqdt" path="res://icon.svg" id="2_ufinb"]
+[ext_resource type="Script" path="res://scripts/player.gd" id="3_er4ta"]
+[ext_resource type="PackedScene" uid="uid://du72invwd8736" path="res://scenes/pause_menu.tscn" id="4_4kc3x"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tnrny"]
+size = Vector2(115, 117)
+
+[node name="Hello World" type="Node2D"]
+script = ExtResource("1_qhpcb")
+
+[node name="Player" type="Sprite2D" parent="."]
+modulate = Color(0.576471, 1, 1, 1)
+position = Vector2(479, 312)
+rotation = -3.76991
+texture = ExtResource("2_ufinb")
+script = ExtResource("3_er4ta")
+rot_speed = 5
+
+[node name="Bullet_Spawn" type="Sprite2D" parent="Player"]
+position = Vector2(0, -77)
+scale = Vector2(0.35, 0.35)
+texture = ExtResource("2_ufinb")
+
+[node name="Area2D" type="Area2D" parent="Player"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player/Area2D"]
+position = Vector2(-0.5, -0.5)
+shape = SubResource("RectangleShape2D_tnrny")
+
+[node name="Score" type="Label" parent="."]
+offset_left = 28.0
+offset_top = 6.0
+offset_right = 80.0
+offset_bottom = 29.0
+text = "Score: 0"
+
+[node name="Highscore" type="Label" parent="."]
+offset_left = 319.0
+offset_top = 10.0
+offset_right = 405.0
+offset_bottom = 33.0
+text = "Highscore: 0"
+
+[node name="SpawnTimer" type="Timer" parent="."]
+
+[node name="Pause_Menu" parent="." instance=ExtResource("4_4kc3x")]
+
+[connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_timer_timeout"]

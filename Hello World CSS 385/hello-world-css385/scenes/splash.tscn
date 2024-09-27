@@ -1,0 +1,85 @@
+[gd_scene load_steps=5 format=3 uid="uid://bkty2wxukhwoo"]
+
+[ext_resource type="Script" path="res://scripts/splash.gd" id="1_jj5o6"]
+
+[sub_resource type="Animation" id="Animation_3po8g"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Mask:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_7ll1n"]
+resource_name = "splash"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Mask:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.0666667, 1, 2.03333, 2.96667),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(0, 0, 0, 0), Color(0, 0, 0, 0), Color(0, 0, 0, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_knsx7"]
+_data = {
+"RESET": SubResource("Animation_3po8g"),
+"splash": SubResource("Animation_7ll1n")
+}
+
+[node name="Splash" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_jj5o6")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 0
+offset_right = 1162.0
+offset_bottom = 657.0
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 272.0
+offset_top = 211.0
+offset_right = 839.0
+offset_bottom = 398.0
+theme_override_colors/font_color = Color(0.352763, 0.552752, 1, 1)
+theme_override_colors/font_shadow_color = Color(0.299547, 0.299547, 0.299547, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = -5
+theme_override_constants/shadow_offset_y = 6
+theme_override_constants/outline_size = 7
+theme_override_constants/shadow_outline_size = 13
+theme_override_font_sizes/font_size = 80
+text = "Hello World"
+uppercase = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_knsx7")
+}
+
+[node name="Mask" type="ColorRect" parent="."]
+layout_mode = 0
+offset_right = 1163.0
+offset_bottom = 660.0
+color = Color(0, 0, 0, 1)
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 3.0
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

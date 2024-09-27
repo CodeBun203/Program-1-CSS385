@@ -1,0 +1,42 @@
+[gd_scene load_steps=2 format=3 uid="uid://du72invwd8736"]
+
+[ext_resource type="Script" path="res://scripts/pause_menu.gd" id="1_0hw74"]
+
+[node name="Pause_Menu" type="CanvasLayer"]
+script = ExtResource("1_0hw74")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = -1
+anchor_right = 0.234
+anchor_bottom = 0.19
+offset_left = 339.0
+offset_top = 128.0
+offset_right = 124.432
+offset_bottom = 66.88
+scale = Vector2(10.0408, 6.50059)
+color = Color(0.172833, 0.172833, 0.172833, 1)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ColorRect"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 9.0
+offset_right = 134.0
+offset_bottom = 110.0
+scale = Vector2(0.4, 0.4)
+
+[node name="Resume" type="Button" parent="ColorRect/VBoxContainer"]
+custom_minimum_size = Vector2(5, 5)
+layout_mode = 2
+text = "Resume"
+
+[node name="Quit" type="Button" parent="ColorRect/VBoxContainer"]
+layout_mode = 2
+text = "QUIT"
+
+[node name="Highscore_Reset" type="Button" parent="ColorRect/VBoxContainer"]
+layout_mode = 2
+text = "Reset Highscore"
+
+[connection signal="pressed" from="ColorRect/VBoxContainer/Resume" to="." method="_on_resume_pressed"]
+[connection signal="pressed" from="ColorRect/VBoxContainer/Quit" to="." method="_on_quit_pressed"]
+[connection signal="pressed" from="ColorRect/VBoxContainer/Highscore_Reset" to="." method="_on_highscore_reset_pressed"]
